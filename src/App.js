@@ -8,6 +8,9 @@ import Admin from './Components/AdminPanel';
 import Bos from './Components/Bos.js';
 
 import { QuizContext } from "./Helpers/Contex";
+import NewStudent from './Components/NewStudent';
+import AddQuestion from './Components/AddQuestion';
+import AddLesson from './Components/AddLesson';
 
 function App() {
   const [gameState, setGameState] = useState("login");
@@ -16,25 +19,25 @@ function App() {
   const [user, setUser] = useState({ name: "", password: "" });
   const [selected, setSelected] = useState({});
   const [exam, setExam] = useState({ name: "", part: "" });
-  const [history,setHistory]=useState([""]);
+  const [history,setHistory]=useState([]);
 
   const [studentList, setStudentList] = useState([
     {
       personel: {
         name: "Can Yücel",
-        password: "2",
-        no: 3
+        password: "123",
+        no: "3"
       },
       exams: {
-        Matematik: { vize: 0, final: 0, status: false },
-        Fizik: { vize: 0, final: 0, status: false }
+        Matematik: { vize: "", final: "", status: false },
+        Fizik: { vize: "", final: "", status: false }
       }
     },
     {
       personel: {
         name: "admin",
         password: "123",
-        no: 12
+        no: "1"
       },
       exams: {
 
@@ -44,12 +47,12 @@ function App() {
     {
       personel: {
         name: "Ali Yılmaz",
-        password: "2",
-        no: 4
+        password: "123",
+        no: "4"
       },
       exams: {
-        Matematik: { vize: 0, final: 0, status: false },
-        Fizik: { vize: 0, final: 0, status: false },
+        Matematik: { vize: "", final: "", status: false },
+        Fizik: { vize: "", final: "", status: false },
        
 
       }
@@ -57,24 +60,24 @@ function App() {
     {
       personel: {
         name: "Ayşe Demir",
-        password: "2",
-        no: 5
+        password: "123",
+        no: "5"
       },
       exams: {
-        Matematik: { vize: 0, final: 0, status: false },
-        Fizik: { vize: 0, final: 0, status: false }
+        Matematik: { vize: "", final: "", status: false },
+        Fizik: { vize: "", final: "", status: false }
       }
     },
     {
       personel: {
         name: "Can Yüksel",
-        password: "1212",
-        no: 6
+        password: "123",
+        no: "6"
       },
       exams: {
-        Matematik: { vize: 0, final: 0, status: false ,vizeHistory:[],finalHistory:[]},
-        Fizik: { vize: 0, final: 0, status: false },
-        Biyoloji: { vize: 0, final: 0, status: false }
+        Matematik: { vize: "", final: "", status: false ,vizeHistory:[],finalHistory:[]},
+        Fizik: { vize: "", final: "", status: false },
+        Biyoloji: { vize: "", final: "", status: false }
       }
     },
 
@@ -259,7 +262,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Quiz App </h1>
       <QuizContext.Provider value={{
         gameState, setGameState, score, setScore, ogrNo, setOgrNo, user,
         setUser, selected, setSelected, setExam, exam, studentList, setStudentList,
@@ -271,6 +273,9 @@ function App() {
         {gameState === "endScreen" && <EndScreen />}
         {gameState === "admin" && <Admin />}
         {gameState === "bos" && <Bos />}
+        {gameState === "student" && <NewStudent />}
+        {gameState === "question" && <AddQuestion />}
+        {gameState === "lesson" && <AddLesson />}
       </QuizContext.Provider>
 
     </div>

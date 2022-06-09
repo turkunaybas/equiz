@@ -10,17 +10,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 
 
 export default function MainMenu() {
 
-  const { selected, setGameState, setExam, setUser, user, studentList } = React.useContext(QuizContext)
+  const { quastions,selected, setGameState, setExam, setUser, user, studentList } = React.useContext(QuizContext)
 
   const Logout = () => {
-    setUser({ name: "", password: "" });
+    setUser({ no: "", password: "" });
     setGameState("login");
   }
   return (
@@ -33,7 +35,7 @@ export default function MainMenu() {
           window.localStorage.setItem('Students', JSON.stringify(Quastions))
         }}>BAŞLA </button> */}
         <div className='maintable'>
-          <button onClick={Logout}> ÇIKIŞ</button>
+          <Button style={{backgroundColor:"#f07167"}} variant='contained' onClick={Logout}> ÇIKIŞ</Button>
           <h1> {selected.personel.name}</h1>
         </div>
 
@@ -55,14 +57,19 @@ export default function MainMenu() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
+                    
                     {item}
                   </TableCell>
-                  <TableCell align="right">{selected.exams[item].vize !== 0 ? selected.exams[item].vize : ""} <button disabled={selected.exams[item].vize !== 0} onClick={() => { setGameState("quiz"); setExam({ name: item, part: "vize" }) }}> Vize</button>
+                  <TableCell align="right">
+
+                    
+  
+                    <Button  style={{ borderWidth:1.8}}variant="outlined" disabled={quastions[item]["vize"]===undefined ||selected.exams[item].vize !== ""} onClick={() => { setGameState("quiz"); setExam({ name: item, part: "vize" }) }}>   {selected.exams[item].vize !== "" ? selected.exams[item].vize :<BorderColorIcon />}</Button>
 
                   </TableCell>
-                  <TableCell align="right">{selected.exams[item].final !== 0 ? selected.exams[item].final : ""} <button disabled={selected.exams[item].final !== 0} onClick={() => { setGameState("quiz"); setExam({ name: item, part: "final" }) }}> Final</button>
-                  </TableCell>
-
+                  <TableCell align="right"> <Button variant="outlined"disabled={quastions[item]["final"]===undefined || selected.exams[item].final !== ""} onClick={() => { setGameState("quiz"); setExam({ name: item, part: "final" }) }}> {selected.exams[item].final !== "" ? selected.exams[item].final :<BorderColorIcon />} </Button>
+                  </TableCell> 
+      
                 </TableRow>
               )
               )
@@ -71,7 +78,7 @@ export default function MainMenu() {
           </Table>
         </TableContainer>
 
-
+       
 
 
 

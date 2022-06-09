@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { QuizContext } from '../Helpers/Contex';
 import "../App.css";
+import Button from '@mui/material/Button';
 
 export default function EndScreen() {
   const { score, setScore, setGameState, exam, setStudentList, selected, quastions, history, setHistory } = useContext(QuizContext);
@@ -22,6 +23,7 @@ export default function EndScreen() {
     }
     ))
     setScore(0);
+    setHistory([]);
     console.log(history, "sorular")
     setGameState("menu");
 
@@ -29,9 +31,9 @@ export default function EndScreen() {
 
   return (
     <div className='EndScreen'>
-      <h1> Quiz Finished</h1>
+      <h1> SINAV TAMAMLANDI</h1>
       <h3>{score}/ {quastions[exam.name][exam.part].length}</h3>
-      <button onClick={restartQuiz}> ANASAYFAYA DÖN</button>
+      <Button style={{ backgroundColor:"#8E443D"}} variant="contained" onClick={restartQuiz}> ANASAYFAYA DÖN</Button>
     </div>
 
   )

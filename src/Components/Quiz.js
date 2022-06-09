@@ -39,7 +39,7 @@ function Quiz() {
 
   return (
     <div className='Quiz'>
-      <h1> {quastions[exam.name][exam.part][currQuestion].prompt} </h1>
+      <h1> {quastions[exam.name][exam.part]?.[currQuestion].prompt} </h1>
       <div className="options">
 
         <button className={`button ${optionChosen.includes("A") && "button-selected"}`} onClick={() => optionChosen.includes("A") ? setOptionChosen("") : setOptionChosen("A")}> {quastions[exam.name][exam.part][currQuestion].optionA}</button>
@@ -50,9 +50,9 @@ function Quiz() {
 
       </div>
       {currQuestion == quastions[exam.name][exam.part].length - 1 ? (
-        <button className='button' onClick={finishQuiz}>Finish Question</button>
+        <button className='button' onClick={finishQuiz}>Sınavı Bitir</button>
       ) : (
-        <button className="button" onClick={nextQuestion}>Next Question</button>
+        <button className="button" onClick={nextQuestion}>Sıradaki Soru</button>
 
       )}
     </div>

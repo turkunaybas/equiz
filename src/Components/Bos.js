@@ -8,7 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import AddStudentModal from './AddStudentModal';
-import { QuizContext } from '../Helpers/Contex'
+import { QuizContext } from '../Helpers/Contex';
+import Button from '@mui/material/Button';
+import ListNotes from './ListNotes';
+import Fab from '@mui/material/Fab';
+import Badge from '@mui/material/Badge';
+import AddIcon from '@mui/icons-material/Add';
+import ArticleIcon from '@mui/icons-material/Article';
+
 
 
 
@@ -41,13 +48,17 @@ const columns = [
 
 
 export default function Bos({ lesson, }) {
- const { studentList, setStudentList } = React.useContext(QuizContext)
+    const { studentList, setStudentList } = React.useContext(QuizContext)
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [open, setOpen] = React.useState(false);
+    const [notes, setNotes] = React.useState();
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [acik, setAcik] = React.useState(false);
+    const openNote = () => setAcik(true);
+    const closeNote = () => setAcik(false);
 
 
 
@@ -55,24 +66,35 @@ export default function Bos({ lesson, }) {
         setPage(newPage);
     };
 
+
+
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
 
+    const showNotes = (list) => {
+        setNotes(list);
+        openNote()
+    };
+
     return (
 
-        <Paper sx={{ width: '100%', marginTop: 5, marginBottom: 7 ,backgroundColor: "#e5ecee"}}>
+        <Paper sx={{ width: '100%', marginTop: 5, marginBottom: 7, backgroundColor: "#eef0f2" }}>
+            <Fab onClick={handleOpen} size="small" color="primary" aria-label="add">
+                <AddIcon />
+            </Fab>
             <TableContainer sx={{ maxHeight: 400 }}>
-                <button onClick={handleOpen} style={{ height: 50, }}>Öğrenci ekle</button>
-                <Table style={{ backgroundColor : "#f1f1f1" , }} stickyHeader aria-label="sticky table">
+                {/* <Button size ="medium"variant="outlined" onClick={handleOpen} >Öğrenci ekle</Button> */}
+
+                <Table style={{ backgroundColor: "#fafaff", }} stickyHeader aria-label="sticky table">
 
                     <TableHead >
                         <TableRow  >
-                            <TableCell align="center" colSpan={1} style={{backgroundColor : "#e5ecee" }}>
+                            <TableCell align="center" colSpan={1} style={{ backgroundColor: "#eef0f2" }}>
                                 {lesson}
                             </TableCell>
-                            <TableCell align="center" colSpan={3} style={{backgroundColor : "#e5ecee" }}>
+                            <TableCell align="center" colSpan={3} style={{ backgroundColor: "#eef0f2" }}>
                                 SINAV DETAY
                             </TableCell>
                         </TableRow>
@@ -82,7 +104,7 @@ export default function Bos({ lesson, }) {
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{ top: 57, minWidth: column.minWidth,backgroundColor : "#a4b9c4"  }}
+                                    style={{ top: 57, minWidth: column.minWidth, backgroundColor: "#a9def9" }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -102,9 +124,12 @@ export default function Bos({ lesson, }) {
                                                     <TableCell key={column.id} align={column.align}>
                                                         {column.id !== "vize" && column.id !== "final" ? column.format && typeof value === 'number'
                                                             ? column.format(value)
-                                                            : value : <button style={{ backgroundColor: student.exams[lesson][column.id] !== 0 ? "green" : "#d4c37c" }}> {column.label}</button>}
-                                                            <label> {student.exams[lesson][column.id] }</label>
+                                                            : value : <Button variant="outlined" disabled={student.exams[lesson][column.id] === ""} onClick={() => { showNotes(column.id === "vize" ? student.exams[lesson]["vizeHistory"] : student.exams[lesson]["finalHistory"]) }} > {column.label}</Button>}
 
+                                                        <label style={{ marginLeft: 15 }}> {student.exams[lesson][column.id] !== "" && student.exams[lesson][column.id]}</label>
+                                                       
+                                                        {/* {student.exams[lesson][column.id] !== "" && <Badge color="info" badgeContent={student.exams[lesson][column.id]}>
+                                                            <ArticleIcon /> */}
 
                                                     </TableCell>
                                                 );
@@ -126,6 +151,7 @@ export default function Bos({ lesson, }) {
             />
 
             <AddStudentModal handleClose={handleClose} handleOpen={handleOpen} open={open} lesson={lesson} studentList={studentList} setStudentList={setStudentList} />
+            <ListNotes closeNote={closeNote} acik={acik} notes={notes} />
 
         </Paper>
 

@@ -7,19 +7,29 @@
   flex-direction: column;
 }
 
-.Menu,
 .Quiz,
 .EndScreen{
   width: 1200px;
   height: 600px;
   border-radius: 10px;
-  background-color: orange;
+  background-color: #2a6f97;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 60px;
 }
-
+.Menu {
+  width: 1200px;
+  height: 600px;
+  border-radius: 10px;
+  background-color: #1b4965;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
 
  .button {
   width: 800px;
@@ -34,7 +44,7 @@
   
   }
   .button-selected {
-    background-color: aquamarine;
+    background-color: #E0D68A;
   }
 
 
@@ -63,12 +73,14 @@ input{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #53565A;
+  background-color: #F8F8F8;
+ 
 
 }
 form{
   display: block;
   position: relative;
+  margin-top: 50px;
 
 }
 form:after {
@@ -80,7 +92,7 @@ form:after {
   right: -5px;
   bottom: -5px;
   z-index: 1;
-  background-image: linear-gradient(to bottom right, #FFCE00 , #FE4880);
+  background-image: linear-gradient(to bottom right, #20a4f3 , #52b69a);
 }
 form .form-inner {
   position: relative;
@@ -98,7 +110,7 @@ form .form-inner h2 {
 }
 form .form-inner .form-group{
   display: block;
-  width: 300px;
+  width: 500px;
   margin-bottom: 15px;
 
 }
@@ -112,7 +124,7 @@ form .form-inner .form-group{
 }
 
 .form-inner .form-group:focus-within label {
-  color: #FE4880;
+  color: #006494;
 }
 
 form .form-inner .form-group input {
@@ -131,7 +143,7 @@ form .form-inner input[type="submit"]{
   display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
-  background-image: linear-gradient(to right , #FFCE00 ,#FFCE00 , #FE4880);
+  background-image: linear-gradient(to right , #00a6fb ,#0582ca , #006494);
   background-size: 200%;
   background-position:0%;
   transition:0.4s;

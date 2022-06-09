@@ -23,12 +23,15 @@ export default function AddStudentModal({ handleClose, open, lesson ,studentList
             console.log('itemlar',item);
             checked?.map((no) => {
                 if (item?.personel?.no === no) {
-                    item = { ...item, exams: { ...item?.exams,[lesson]: { vize: 0, final: 0 ,satus:""} } }
+                    item = { ...item, exams: { ...item?.exams,[lesson]: { vize: "", final: "" ,satus:""} } }
                 }
             })
             return item;
 
-        }))
+        }));
+        handleClose();
+
+        setChecked([]);
     };
 
     console.log('list',studentList)
@@ -67,14 +70,13 @@ export default function AddStudentModal({ handleClose, open, lesson ,studentList
                         {studentList.map((value) => {
                             const labelId = value.personel.no;
 
+                         
+                           
+                            
                             return (
+                                value.personel.name!=="admin"&&
                                 <ListItem
                                     key={value.personel.no}
-                                    // secondaryAction={
-                                    //     <IconButton edge="end" aria-label="comments">
-                                    //         <CommentIcon />
-                                    //     </IconButton>
-                                    // }
                                     disablePadding
                                 >
                                     <ListItemButton role={undefined} onClick={handleToggle(value.personel.no)} dense>
@@ -98,7 +100,8 @@ export default function AddStudentModal({ handleClose, open, lesson ,studentList
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Vazgeç</Button>
-                    <Button onClick={()=>setLesson(checked,lesson)}>Kaydet</Button>
+                    <Button onClick={()=>setLesson(checked,lesson)
+                      }>Kaydet</Button>
                 </DialogActions>
             </Dialog>
 

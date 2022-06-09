@@ -6,6 +6,7 @@ import { QuizContext } from '../Helpers/Contex';
 export default function Login() {
   const adminUser = {
     name: "admin",
+    no:"1",
     password: "123"
   }
 
@@ -15,15 +16,15 @@ export default function Login() {
   const Login = details => {
     console.log(details);
     let selected;
-    selected = studentList.find(item => item.personel.name === details.name && item.personel.password === details.password)
+    selected = studentList.find(item => item.personel.no === details.no && item.personel.password === details.password)
     setSelected(selected)
     if (selected) {
       setUser({
-        name: details.name,
+        no: details.no,
         password: details.password
       });
 
-      if (selected.personel.name=== adminUser.name && selected.personel.password===adminUser.password){
+      if (selected.personel.no=== adminUser.no && selected.personel.password===adminUser.password){
         setGameState("admin");
       }
       
@@ -42,7 +43,7 @@ export default function Login() {
   }
   return (
     <div className='Login'>
-      {(user.name != "") ? (
+      {(user.no !== ""&&user.password!=="") ? (
         <div className='welcome'>
           <h2> Welcome, <span>{user.name}</span></h2>
           <button onClick={Logout} >logout</button>
